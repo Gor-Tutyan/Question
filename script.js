@@ -26,8 +26,8 @@ document.getElementById('start-btn').addEventListener('click', () => {
 const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
     { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… որ թիվն է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
-    { question: "Ո՞ր մոլորակի վրա մեկ տարին ավելի կարճ է, քան մեկ օրը։", options: ["a) Վեներա", "b) Մերկուրի", "c) Մարս", "d) Սատուրն"], correct: "a" },
-    { question: "Քանի անգամ կհանդիպի 9 թվանշանը 1-ից մինչեւ 100 ներառյալ թվերի մեջ։", options: ["a) 11", "b) 19", "c) 20", "d) 21"], correct: "c" },
+    { question: "Ո՞ր մոլորակի վրա է մեկ տարին ավելի կարճ, քան մեկ օրը։", options: ["a) Վեներա", "b) Մերկուրի", "c) Մարս", "d) Սատուրն"], correct: "a" },
+    { question: "Քանի անգամ կհանդիպի 9 թվանշանը 1-ից մինչև 100-ը ներառյալ թվերի մեջ։", options: ["a) 11", "b) 19", "c) 20", "d) 21"], correct: "c" },
     { question: "Եթե E = 5, ապա BOX = ?։", options: ["a) 40", "b) 41", "c) 42", "d) 45"], correct: "b" },
     { question: "Ո՞ր ընկերությունն է ստեղծել աշխարհում առաջին սենսորային էկրանով սմարթֆոնը (1994 թ.)։", options: ["a) Nokia", "b) IBM", "c) Motorola", "d) Apple"], correct: "b" },
     { question: "Ո՞վ է իրականում հորինել համակարգչային մկնիկը։", options: ["a) Սթիվ Ջոբս", "b) Դուգլաս Էնգելբարտ", "c) Ալան Թյուրինգ", "d) Բիլ Գեյթս"], correct: "b" }
@@ -89,7 +89,7 @@ function showResult() {
 
     let html = score === questions.length
         ? `<h2 style="color:#005eb8; font-size:2.4rem;">Շնորհավորում եմ թեռնիկս!</h2>
-           <p style="font-size:1.5rem; margin:30px 0;">Գնա ու վերցրու քո նվերը ♡</p>
+           <p style="font-size:1.5rem; margin:30px 0;">Գնա և վերցրու քո նվերը ♡</p>
            <img src="picture.jpg" alt="Քո նվերը" class="congrats-image">`
         : `<strong style="font-size:2.8rem; color:#d32f2f;">${score} / ${questions.length}</strong>
            <p style="margin-top:25px; font-size:1.4rem;">Փորձիր նորից, դու շատ մոտ ես ♡</p>`;
