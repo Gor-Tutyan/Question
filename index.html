@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Հետաքրքիր Հարցաշար</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <h1>Հետաքրքիր Հարցաշար</h1>
+        <div id="question-container">
+            <h2 id="question"></h2>
+            <div id="options"></div>
+        </div>
+
+        <button id="next-btn" disabled>Հաջորդ հարցը →</button>
+
+        <div id="result" class="hidden">
+            <p id="score"></p>
+            <button onclick="location.reload()">Նորից սկսել</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
