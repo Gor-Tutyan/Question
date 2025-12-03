@@ -2,8 +2,8 @@ const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
     { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… Ի՞նչ է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
     { question: "Ո՞ր մոլորակի վրա մեկ տարին ավելի կարճ է, քան մեկ օրը։", options: ["a) Վեներա", "b) Մերկուրի", "c) Մարս", "d) Սատուրն"], correct: "a" },
-    { question: "Ո՞ր կենդանին ունի երեք սիրտ։", options: ["a) Կաղամար", "b) Ութոտնուկ", "c) Կոկորդիլոս", "d) Ընձուղտ"], correct: "b" },
-    { question: "Ո՞ր կենդանին պաշտոնապես ճանաչված է որպես կենսաբանորեն անմահ (չի ծերանում)։", options: ["a) Գրենլանդական շնաձուկ", "b) Meduza Turritopsis dohrnii («անմահ մեդուզա»)", "c) Հսկա կրիա", "d) Լոբստեր"], correct: "b" },
+    { question: "Քանի անգամ կհանդիպի 9 թվանշանը 1-ից մինչեւ 100 ներառյալ թվերի մեջ։", options: ["a) 11", "b) 19", "c) 20", "d) 21"], correct: "c" },
+    { question: "Եթե E = 5, ապա BOX = ?։", options: ["a) 40", "b) 41", "c) 42", "d) 45"], correct: "b" },
     { question: "Ո՞ր ընկերությունն է ստեղծել աշխարհում առաջին սենսորային էկրանով սմարթֆոնը (1994 թ.)։", options: ["a) Nokia", "b) IBM", "c) Motorola", "d) Apple"], correct: "b" },
     { question: "Ո՞վ է իրականում հորինել համակարգչային մկնիկը։", options: ["a) Սթիվ Ջոբս", "b) Դուգլաս Էնգելբարտ", "c) Ալան Թյուրինգ", "d) Բիլ Գեյթս"], correct: "b" }
 ];
@@ -37,19 +37,19 @@ function loadQuestion() {
 function chooseOption(selectedDiv, selectedText) {
     document.querySelectorAll('.option').forEach(opt => {
         opt.classList.remove('selected');
-        opt.style.pointerEvents = 'none';
     });
 
     selectedDiv.classList.add('selected');
 
     const correctAnswer = questions[currentQuestion].correct;
     const firstChar = selectedText.trim().charAt(0);
-    if (firstChar === correctAnswer || selectedText.includes(correctAnswer)) {
-        score++;
-    }
+
+    // Не увеличиваем счет сразу — считаем только при нажатии "Հաջորդ հարցը"
+    selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer));
 
     nextBtn.disabled = false;
 }
+
 
 nextBtn.onclick = () => {
     currentQuestion++;
