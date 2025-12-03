@@ -1,125 +1,58 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
 body {
-    font-family: 'Arial', sans-serif;
-    background: #f8fbff;
-    color: #333;
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-family: 'Comic Sans MS', Arial, sans-serif;
+    background: #f0f8ff;
+    text-align: center;
     padding: 20px;
 }
 
 .quiz-container {
-    background: #ffffff;
-    padding: 40px;
+    max-width: 600px;
+    margin: auto;
+    background: #fff;
+    padding: 20px;
     border-radius: 20px;
-    box-shadow: 0 10px 40px rgba(0, 94, 184, 0.15);
-    max-width: 720px;
-    width: 100%;
-    text-align: center;
-    border: 3px solid #005eb8;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.2);
 }
 
-h1 {
-    font-size: 24px;
-    color: #005eb8;
-    margin-bottom: 30px;
-}
-
-h2 {
-    font-size: 18px;
-    color: #003087;
-    margin-bottom: 25px;
-}
-
-#options {
-    display: grid;
-    gap: 16px;
-    margin: 35px 0;
-}
+h1 { color: #d32f2f; }
+h2 { color: #005eb8; }
 
 .option {
-    background: #f0f7ff;
-    border: 2px solid #005eb8;
-    padding: 18px 22px;
-    border-radius: 14px;
+    background: #ffebcd;
+    margin: 10px 0;
+    padding: 12px 20px;
+    border-radius: 12px;
     cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 1.15rem;
-    color: #003087;
+    transition: 0.2s;
+    font-size: 1.1rem;
 }
 
-.option:hover {
-    background: #e0eeff;
-    border-color: #003087;
-    transform: translateY(-4px);
-    box-shadow: 0 6px 15px rgba(0, 94, 184, 0.2);
-}
-
-.option.selected {
-    background: #005eb8 !important;
-    color: white !important;
-    border-color: #003087;
-    font-weight: bold;
-    transform: scale(1.02);        /* было 1.98 — вот и вся проблема */
-    width: 100%;                   /* фиксируем одинаковую ширину */
-    box-sizing: border-box;
-}
+.option:hover { background: #ffe4b5; }
+.option.selected { background: #90ee90; }
 
 #next-btn {
-    background: #005eb8;
-    color: white;
-    border: none;
-    padding: 16px 40px;
-    font-size: 1.3rem;
-    border-radius: 50px;
-    cursor: pointer;
     margin-top: 20px;
-    transition: 0.3s;
-    font-weight: bold;
-}
-
-#next-btn:hover:not(:disabled) {
-    background: #003087;
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(0, 94, 184, 0.3);
-}
-
-#next-btn:disabled {
-    background: #aaa;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.hidden {
-    display: none;
-}
-
-#result {
-    margin-top: 30px;
-}
-
-#result button {
-    margin-top: 25px;
-    padding: 14px 30px;
-    background: #00a352;
-    color: white;
+    padding: 12px 30px;
+    font-size: 1.2rem;
     border: none;
-    border-radius: 12px;
-    font-size: 1.1rem;
+    border-radius: 16px;
+    background-color: #d32f2f;
+    color: white;
     cursor: pointer;
+    transition: 0.3s;
 }
+
+#next-btn:disabled { background-color: #f5a9a9; cursor: default; }
+
+.hidden { display: none; }
 
 .congrats-image {
-    margin-top: 30px;
-    max-width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    border: 4px solid #005eb8;
+    width: 250px;
+    margin-top: 20px;
+    animation: bounce 1s infinite alternate;
+}
+
+@keyframes bounce {
+    0% { transform: translateY(0px); }
+    100% { transform: translateY(-15px); }
 }
