@@ -7,7 +7,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="quiz-container">
+
+    <!-- Стартовый экран с GIF и кнопкой -->
+    <div id="start-screen">
+        <div class="start-content">
+            <h1 class="start-content-h1">Սիրելի Թոռնիկիս</h1>
+            <p>Պապիկը քեզ համար նվեր է պատրաստել, բայց ստանալու համար պետք է պատասխանես մի քանի հարցերի։</p>
+            
+            <!-- Новогодний GIF (можно заменить на свой) -->
+            <img src="./santa.gif" 
+                 alt="Новогодняя ёлка" class="start-gif">
+
+            <button id="start-btn">Սկսել խաղը</button>
+        </div>
+    </div>
+
+    <!-- Сам квиз (изначально скрыт) -->
+    <div class="quiz-container hidden" id="quiz">
         <h1>Թոռնիկիս համար հետաքրքիր հարցաշար</h1>
         <div id="question-container">
             <h2 id="question"></h2>

@@ -1,3 +1,28 @@
+// === СТАРТОВЫЙ ЭКРАН ===
+document.getElementById('start-btn').addEventListener('click', () => {
+    const startScreen = document.getElementById('start-screen');
+    const quiz = document.getElementById('quiz');
+
+    startScreen.style.opacity = '0';
+    setTimeout(() => {
+        startScreen.style.display = 'none';
+        quiz.classList.remove('hidden');
+
+        // Плавное появление квиза
+        quiz.style.opacity = '0';
+        quiz.style.transform = 'translateY(30px)';
+        setTimeout(() => {
+            quiz.style.transition = 'all 0.8s ease';
+            quiz.style.opacity = '1';
+            quiz.style.transform = 'translateY(0)';
+        }, 50);
+
+        // ← ВАЖНО: только сейчас загружаем первый вопрос!
+        loadQuestion();
+    }, 800);
+});
+
+// === КВИЗ ===
 const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
     { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… որ թիվն է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
@@ -35,18 +60,11 @@ function loadQuestion() {
 }
 
 function chooseOption(selectedDiv, selectedText) {
-    // Снимаем выделение со всех
-    document.querySelectorAll('.option').forEach(opt => {
-        opt.classList.remove('selected');
-    });
-
-    // Выделяем выбранный
+    document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
     selectedDiv.classList.add('selected');
 
     const correctAnswer = questions[currentQuestion].correct;
     const firstChar = selectedText.trim().charAt(0);
-
-    // Запоминаем, правильный ли ответ
     selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer)).toString();
 
     nextBtn.disabled = false;
@@ -54,14 +72,9 @@ function chooseOption(selectedDiv, selectedText) {
 
 nextBtn.onclick = () => {
     const selected = document.querySelector('.option.selected');
-
-    // Если выбран и правильный
-    if (selected && selected.dataset.correct === "true") {
-        score++;
-    }
+    if (selected && selected.dataset.correct === "true") score++;
 
     currentQuestion++;
-
     if (currentQuestion < questions.length) {
         loadQuestion();
     } else {
@@ -74,22 +87,14 @@ function showResult() {
     nextBtn.classList.add('hidden');
     resultEl.classList.remove('hidden');
 
-    let html = '';
-
-    if (score === questions.length) {
-        html = `
-            <h2 style="color:#005eb8; font-size:2.2rem;">Շնորհավորում եմ թեռնիկս!</h2>
-            <p style="font-size:1.4rem; margin:20px 0;">Գնա ու վերցրու քո նվերը</p>
-            <img src="picture.jpg" alt="Հաղթանակ" class="congrats-image">
-        `;
-    } else {
-        html = `
-            <strong style="font-size:2.5rem; color:#d32f2f;">${score} / ${questions.length}</strong>
-            <p style="margin-top:20px; font-size:1.3rem;">Փորձիր նորից, դու շատ մոտ ես</p>
-        `;
-    }
+    let html = score === questions.length
+        ? `<h2 style="color:#005eb8; font-size:2.4rem;">Շնորհավորում եմ թեռնիկս!</h2>
+           <p style="font-size:1.5rem; margin:30px 0;">Գնա ու վերցրու քո նվերը ♡</p>
+           <img src="picture.jpg" alt="Քո նվերը" class="congrats-image">`
+        : `<strong style="font-size:2.8rem; color:#d32f2f;">${score} / ${questions.length}</strong>
+           <p style="margin-top:25px; font-size:1.4rem;">Փորձիր նորից, դու շատ մոտ ես ♡</p>`;
 
     scoreEl.innerHTML = html;
 }
 
-loadQuestion();
+// НИЧЕГО НЕ ВЫЗЫВАЕМ СРАЗУ — только после нажатия кнопки "Սկսել խաղը"
