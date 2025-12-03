@@ -85,7 +85,7 @@ function showResult() {
     } else {
         html = `
             <strong style="font-size:2.5rem; color:#d32f2f;">${score} / ${questions.length}</strong>
-            <p style="margin-top:20px; font-size:1.3rem;">Փորձեք նորից, դուք շատ մոտ եք</p>
+            <p style="margin-top:20px; font-size:1.3rem;">Փորձիր նորից, դու շատ մոտ ես</p>
         `;
     }
 
