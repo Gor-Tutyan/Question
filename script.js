@@ -50,9 +50,12 @@ function chooseOption(selectedDiv, selectedText) {
     selectedDiv.classList.add('selected');
 
     const correctAnswer = questions[currentQuestion].correct;
-    const firstChar = selectedText.trim().charAt(0);
-    selectedDiv.dataset.correct = (firstChar === correctAnswer).toString();
+    
+    // ГЛАВНОЕ ИСПРАВЛЕНИЕ: сравниваем весь текст, а не только первую букву!
+    const isCorrect = selectedText.trim() === correctAnswer.trim() ||
+                     selectedText.trim().charAt(0) === correctAnswer; // для вариантов с буквой
 
+    selectedDiv.dataset.correct = isCorrect.toString();
     nextBtn.disabled = false;
 }
 
@@ -76,19 +79,16 @@ function showResult() {
     let html = '';
 
     if (score === questions.length) {
-        // ВСЁ ПРАВИЛЬНО — ПОБЕДА!
         html = `
             <h2 style="color:#005eb8; font-size:2.6rem; margin-bottom:20px;">Շնորհավորում եմ թեռնիկս!</h2>
             <p style="font-size:1.7rem; margin:30px 0;">Գնա և վերցրու քո նվերը ♡</p>
             <img src="picture.jpg" alt="Քո նվերը" class="congrats-image">
         `;
     } else {
-        // ЕСТЬ ОШИБКИ — милый грустный гиф
         html = `
             <h2 style="color:#e74c3c; font-size:2.4rem;">${score} / ${questions.length}</h2>
             <p style="font-size:1.8rem; margin:30px 0;">Փորձիր նորից, դու շատ մոտ ես ♡</p>
-            <img src="./grinch.gif" 
-                 alt="Не грусти" class="sad-gif">
+            <img src="./grinch.gif" alt="Не грусти" class="sad-gif">
         `;
     }
 
