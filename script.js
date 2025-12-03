@@ -1,28 +1,14 @@
 // === СТАРТОВЫЙ ЭКРАН ===
 document.getElementById('start-btn').addEventListener('click', () => {
-    const startScreen = document.getElementById('start-screen');
-    const quiz = document.getElementById('quiz');
-
-    startScreen.style.opacity = '0';
+    document.getElementById('start-screen').style.opacity = '0';
     setTimeout(() => {
-        startScreen.style.display = 'none';
-        quiz.classList.remove('hidden');
-
-        // Плавное появление квиза
-        quiz.style.opacity = '0';
-        quiz.style.transform = 'translateY(30px)';
-        setTimeout(() => {
-            quiz.style.transition = 'all 0.8s ease';
-            quiz.style.opacity = '1';
-            quiz.style.transform = 'translateY(0)';
-        }, 50);
-
-        // ← ВАЖНО: только сейчас загружаем первый вопрос!
+        document.getElementById('start-screen').style.display = 'none';
+        document.getElementById('quiz').classList.remove('hidden');
         loadQuestion();
     }, 800);
 });
 
-// === КВИЗ ===
+// === ВОПРОСЫ ===
 const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
     { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… որ թիվն է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
@@ -65,7 +51,7 @@ function chooseOption(selectedDiv, selectedText) {
 
     const correctAnswer = questions[currentQuestion].correct;
     const firstChar = selectedText.trim().charAt(0);
-    selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer)).toString();
+    selectedDiv.dataset.correct = (firstChar === correctAnswer).toString();
 
     nextBtn.disabled = false;
 }
@@ -87,14 +73,24 @@ function showResult() {
     nextBtn.classList.add('hidden');
     resultEl.classList.remove('hidden');
 
-    let html = score === questions.length
-        ? `<h2 style="color:#005eb8; font-size:2.4rem;">Շնորհավորում եմ թեռնիկս!</h2>
-           <p style="font-size:1.5rem; margin:30px 0;">Գնա և վերցրու քո նվերը ♡</p>
-           <img src="picture.jpg" alt="Քո նվերը" class="congrats-image">`
-        : `<strong style="font-size:2.8rem; color:#d32f2f;">${score} / ${questions.length}</strong>
-           <p style="margin-top:25px; font-size:1.4rem;">Փորձիր նորից, դու շատ մոտ ես ♡</p>`;
+    let html = '';
+
+    if (score === questions.length) {
+        // ВСЁ ПРАВИЛЬНО — ПОБЕДА!
+        html = `
+            <h2 style="color:#005eb8; font-size:2.6rem; margin-bottom:20px;">Շնորհավորում եմ թեռնիկս!</h2>
+            <p style="font-size:1.7rem; margin:30px 0;">Գնա և վերցրու քո նվերը ♡</p>
+            <img src="picture.jpg" alt="Քո նվերը" class="congrats-image">
+        `;
+    } else {
+        // ЕСТЬ ОШИБКИ — милый грустный гиф
+        html = `
+            <h2 style="color:#e74c3c; font-size:2.4rem;">${score} / ${questions.length}</h2>
+            <p style="font-size:1.8rem; margin:30px 0;">Փորձիր նորից, դու շատ մոտ ես ♡</p>
+            <img src="./grinch.gif" 
+                 alt="Не грусти" class="sad-gif">
+        `;
+    }
 
     scoreEl.innerHTML = html;
 }
-
-// НИЧЕГО НЕ ВЫЗЫВАЕМ СРАЗУ — только после нажатия кнопки "Սկսել խաղը"
