@@ -1,6 +1,6 @@
 const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
-    { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… Ի՞նչ է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
+    { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… որ թիվն է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
     { question: "Ո՞ր մոլորակի վրա մեկ տարին ավելի կարճ է, քան մեկ օրը։", options: ["a) Վեներա", "b) Մերկուրի", "c) Մարս", "d) Սատուրն"], correct: "a" },
     { question: "Քանի անգամ կհանդիպի 9 թվանշանը 1-ից մինչեւ 100 ներառյալ թվերի մեջ։", options: ["a) 11", "b) 19", "c) 20", "d) 21"], correct: "c" },
     { question: "Եթե E = 5, ապա BOX = ?։", options: ["a) 40", "b) 41", "c) 42", "d) 45"], correct: "b" },
@@ -35,24 +35,33 @@ function loadQuestion() {
 }
 
 function chooseOption(selectedDiv, selectedText) {
+    // Снимаем выделение со всех
     document.querySelectorAll('.option').forEach(opt => {
         opt.classList.remove('selected');
     });
 
+    // Выделяем выбранный
     selectedDiv.classList.add('selected');
 
     const correctAnswer = questions[currentQuestion].correct;
     const firstChar = selectedText.trim().charAt(0);
 
-    // Не увеличиваем счет сразу — считаем только при нажатии "Հաջորդ հարցը"
-    selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer));
+    // Запоминаем, правильный ли ответ
+    selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer)).toString();
 
     nextBtn.disabled = false;
 }
 
-
 nextBtn.onclick = () => {
+    const selected = document.querySelector('.option.selected');
+
+    // Если выбран и правильный
+    if (selected && selected.dataset.correct === "true") {
+        score++;
+    }
+
     currentQuestion++;
+
     if (currentQuestion < questions.length) {
         loadQuestion();
     } else {
@@ -68,14 +77,12 @@ function showResult() {
     let html = '';
 
     if (score === questions.length) {
-        // 7/7 — только поздравление и картинка
         html = `
             <h2 style="color:#005eb8; font-size:2.2rem;">Շնորհավորում ենք!</h2>
             <p style="font-size:1.4rem; margin:20px 0;">Դուք կատարյալ արդյունք եք ցույց տվել</p>
             <img src="picture.jpg" alt="Հաղթանակ" class="congrats-image">
         `;
     } else {
-        // Любой другой результат — только счёт
         html = `
             <strong style="font-size:2.5rem; color:#d32f2f;">${score} / ${questions.length}</strong>
             <p style="margin-top:20px; font-size:1.3rem;">Փորձեք նորից, դուք շատ մոտ եք</p>
