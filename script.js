@@ -1,6 +1,6 @@
 const questions = [
     { question: "Ո՞ր երկիրը ընդհանրապես չունի ոչ մի գետ։", options: ["a) Կատար", "b) ԱՄԷ", "c) Սաուդյան Արաբիա", "d) Լիբիա"], correct: "c" },
-    { question: "Ո՞ր թիվն է հաջորդում հաջորդականությանը՝ 2, 3, 5, 9, 17, 33…?", options: ["65", "64", "66", "67"], correct: "65" },
+    { question: "Թվային հաջորդականություն՝ 2, 3, 5, 9, 17, 33… որ թիվն է հաջորդը?", options: ["65", "64", "66", "67"], correct: "65" },
     { question: "Ո՞ր մոլորակի վրա մեկ տարին ավելի կարճ է, քան մեկ օրը։", options: ["a) Վեներա", "b) Մերկուրի", "c) Մարս", "d) Սատուրն"], correct: "a" },
     { question: "Քանի անգամ կհանդիպի 9 թվանշանը 1-ից մինչեւ 100 ներառյալ թվերի մեջ։", options: ["a) 11", "b) 19", "c) 20", "d) 21"], correct: "c" },
     { question: "Եթե E = 5, ապա BOX = ?։", options: ["a) 40", "b) 41", "c) 42", "d) 45"], correct: "b" },
@@ -35,15 +35,18 @@ function loadQuestion() {
 }
 
 function chooseOption(selectedDiv, selectedText) {
+    // Снимаем выделение со всех
     document.querySelectorAll('.option').forEach(opt => {
         opt.classList.remove('selected');
     });
 
+    // Выделяем выбранный
     selectedDiv.classList.add('selected');
 
     const correctAnswer = questions[currentQuestion].correct;
     const firstChar = selectedText.trim().charAt(0);
 
+    // Запоминаем, правильный ли ответ
     selectedDiv.dataset.correct = (firstChar === correctAnswer || selectedText.includes(correctAnswer)).toString();
 
     nextBtn.disabled = false;
@@ -52,6 +55,7 @@ function chooseOption(selectedDiv, selectedText) {
 nextBtn.onclick = () => {
     const selected = document.querySelector('.option.selected');
 
+    // Если выбран и правильный
     if (selected && selected.dataset.correct === "true") {
         score++;
     }
@@ -74,14 +78,14 @@ function showResult() {
 
     if (score === questions.length) {
         html = `
-            <h2 style="color:#d32f2f; font-size:2.2rem;">Շնորհավորում եմ, իմ փոքրիկը!</h2>
-            <p style="font-size:1.4rem; margin:20px 0;">Արի և գտիր քո նվերը</p>
-            <img src="santa_gift.png" alt="Հաղթանակ" class="congrats-image">
+            <h2 style="color:#005eb8; font-size:2.2rem;">Շնորհավորում եմ թեռնիկս!</h2>
+            <p style="font-size:1.4rem; margin:20px 0;">Գնա ու վերցրու քո նվերը</p>
+            <img src="picture.jpg" alt="Հաղթանակ" class="congrats-image">
         `;
     } else {
         html = `
             <strong style="font-size:2.5rem; color:#d32f2f;">${score} / ${questions.length}</strong>
-            <p style="margin-top:20px; font-size:1.3rem;">Փորձիր նորից, դու շատ մոտ ես հաղթանակին!</p>
+            <p style="margin-top:20px; font-size:1.3rem;">Փորձեք նորից, դուք շատ մոտ եք</p>
         `;
     }
 
