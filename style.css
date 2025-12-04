@@ -30,7 +30,9 @@ body {
     margin-bottom: 20px;
     text-shadow: 0 4px 15px rgba(0,0,0,0.4);
 }
-
+.start-content-p {
+    font-size: 14px;
+}
 .start-content p {
     font-size: 1.7rem;
     margin: 25px 0 40px;
